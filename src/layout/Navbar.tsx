@@ -36,7 +36,7 @@ const Navbar = () => {
   });
 
   return (
-    <header className="fixed top-0 right-0  left-0 bg-transparent">
+    <header className="fixed top-0 right-0 left-0 bg-transparent z-50">
       <nav className="container mx-auto flex justify-between items-center py-5">
         <a
           href="#"
@@ -60,7 +60,7 @@ const Navbar = () => {
       </nav>
       {isModalOpen && (
         <div className="glass-strong  md:hidden animate-fade-in">
-          <div className="container flex flex-col gap-1 mx-auto px-6 py-6 gap-4 rounded-full">
+          <div className="container flex flex-col  mx-auto px-6 py-6 gap-4 rounded-full">
             {displayNav}
             <Button size={"sm"}>Contact Me</Button>
           </div>
