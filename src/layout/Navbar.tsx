@@ -1,9 +1,18 @@
 import { Menu, X } from "lucide-react";
 import Button from "../conponents/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(scrollY > 50);
+    };
+    window.addEventListener(`scroll`, handleScroll);
+    return () => window.removeEventListener(`scroll`, handleScroll);
+  }, []);
   const navLinks = [
     {
       href: `#about`,
@@ -36,7 +45,9 @@ const Navbar = () => {
   });
 
   return (
-    <header className="fixed top-0 right-0 left-0 bg-transparent z-50">
+    <header
+      className={`fixed top-0 right-0 left-0 ${scrolled ? `glass` : `bg-transparent`} z-50`}
+    >
       <nav className="container mx-auto flex justify-between items-center py-5">
         <a
           href="#"
