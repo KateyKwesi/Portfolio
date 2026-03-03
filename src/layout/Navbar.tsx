@@ -35,6 +35,7 @@ const Navbar = () => {
   const displayNav = navLinks.map((nav, index) => {
     return (
       <a
+        onClick={() => setIsModalOpen(false)}
         key={index}
         href={nav.href}
         className="px-4 py-2 text-sm hover:bg-surface rounded-full text-muted-foreground hover:text-foreground"
@@ -46,7 +47,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 ${scrolled ? `glass` : `bg-transparent`} z-50`}
+      className={`fixed top-0 right-0 left-0 transition-all duration-500 ${scrolled ? `glass` : `bg-transparent`} z-50`}
     >
       <nav className="container mx-auto flex justify-between items-center py-5">
         <a
