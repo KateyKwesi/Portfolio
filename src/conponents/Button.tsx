@@ -1,12 +1,15 @@
 type buttonSize = `sm` | `default` | `lg`;
 
-type Props = {
-  className?: string;
+type ButtonProps = React.ComponentProps<"button"> & {
   size: buttonSize;
-  children: React.ReactNode;
 };
 
-const Button = ({ className, size = `default`, children }: Props) => {
+const Button = ({
+  className,
+  size = `default`,
+  children,
+  ...props
+}: ButtonProps) => {
   const baseClasses =
     "relative overflow-hidden rounded-full font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25";
 
@@ -20,7 +23,10 @@ const Button = ({ className, size = `default`, children }: Props) => {
 
   return (
     <button className={`${classes}`}>
-      <span className="relative flex items-center justify-center gap-2">
+      <span
+        className="relative flex items-center justify-center gap-2"
+        {...props}
+      >
         {children}
       </span>
     </button>

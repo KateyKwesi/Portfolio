@@ -62,7 +62,10 @@ const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:block">
-          <Button children={`Contact me`} size="sm" />
+          <a href="#contact">
+            {" "}
+            <Button children={`Contact me`} size="sm" />
+          </a>
         </div>
         <div className="md:hidden flex flex-col">
           <button onClick={() => setIsModalOpen((prev) => !prev)}>
@@ -74,7 +77,10 @@ const Navbar = () => {
         <div className="glass-strong  md:hidden animate-fade-in">
           <div className="container flex flex-col  mx-auto px-6 py-6 gap-4 rounded-full">
             {displayNav}
-            <Button size={"sm"}>Contact Me</Button>
+            <a href="#contact">
+              {" "}
+              <Button size={"sm"}>Contact Me</Button>
+            </a>
           </div>
         </div>
       )}

@@ -47,7 +47,7 @@ const Testimonial = () => {
     },
   ];
   return (
-    <section id="testimonials" className="relative overflow-hidden mb-16">
+    <section id="testimonials" className="relative overflow-hidden py-32">
       <div className="container mx-auto px-6  ">
         <div className="max-w-5xl mx-auto ">
           <div className="text-center space-y-8 mb-16">
