@@ -101,6 +101,7 @@ const Testimonial = () => {
             <button className="flex gap-1">
               {testimonials.map((_, index) => (
                 <button
+                  onClick={() => setActiveTestimonial(index)}
                   key={index}
                   className={`w-2 h-2 ${index === activeTestimonial && `bg-secondary-foreground w-8`} bg-muted-foreground/30 hover:bg-muted-foreground/50 rounded-full transition-all duration-300 `}
                 ></button>
