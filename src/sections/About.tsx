@@ -27,14 +27,17 @@ const About = () => {
   return (
     <section id="about" className="relative py-32 overflow-hidden">
       <div className="px-6 mx-auto container ">
-        <div className="grid lg:grid-cols-2 gap-16 max-w-4xl mx-auto items-center">
+        <div className="grid lg:grid-cols-2 gap-16 max-w-7xl mx-auto items-center">
           <div className="space-y-8 py-8">
-            <p className="text-primary font-semibold text-sm tracking-wider animate-fade-in">
+            <p className="text-primary/40 font-semibold text-sm tracking-wider animate-fade-in">
               ABOUT ME
             </p>
             <h2 className="text-4xl md:text-5xl text-black leading-tight animate-fade-in animation-delay-100">
               Building modern and interactive
-              <span className="  font-serif italic"> web experiences</span>
+              <span className="  font-serif text-primary italic">
+                {" "}
+                web experiences
+              </span>
             </h2>
             <div className="text-muted-foreground space-y-4 animate-fade-in animation-delay-200">
               <p>
