@@ -1,5 +1,7 @@
 import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedBorderButton } from "../conponents/AnimatedBorderButton";
+import slateflix from "../assets/projects/project1.png";
+import chef from "../assets/projects/project2.png";
 
 const Projects = () => {
   const projects = [
@@ -7,7 +9,7 @@ const Projects = () => {
       title: "SlateFlix",
       description:
         "A modern movie discovery app powered by the TMDB API, featuring real-time search, dynamic movie backdrops, and a cinematic UI built with React.",
-      image: "/public/projects/project1.png",
+      image: slateflix,
       tags: ["React", "Vite", "Tailwind CSS", "React Query", "TMDB API"],
       link: "https://slateflix.netlify.app/",
       github: "https://github.com/KateyKwesi/movieApp",
@@ -16,7 +18,7 @@ const Projects = () => {
       title: "AI Recipe Generator",
       description:
         "An AI-powered app that generates structured recipes from simple ingredients, featuring markdown rendering and a clean responsive UI.",
-      image: "/public/projects/project2.png",
+      image: chef,
       tags: [
         "React",
         "TypeScript",
