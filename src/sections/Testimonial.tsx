@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
-
 const Testimonial = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const nextTestimonial = () => {
@@ -18,14 +17,14 @@ const Testimonial = () => {
         "Katey made an incredible impact as a Catch-Up Squad member. He shared resources, answered technical questions, and created a supportive environment that helped his peers succeed. His leadership, collaboration, and technical insight were exemplary.",
       author: "Irene Aragona",
       role: "Program and Community Specialist, ALX Software Engineering",
-      avatar: "/public/irene.jpg",
+      avatar: "/irene.jpg",
     },
     {
       quote:
         "Katey consistently demonstrates technical excellence and a strong learning mindset. He builds projects with attention to detail and takes initiative to experiment with advanced frontend techniques.",
       author: "Cole Baidoo",
       role: "Senior Software Engineer | Cyber Security Specialist | Mentor | Program Manager",
-      avatar: "/public/cole.jpg",
+      avatar: "/cole.jpg",
     },
   ];
   return (
