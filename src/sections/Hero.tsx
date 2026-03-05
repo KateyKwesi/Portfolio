@@ -25,7 +25,7 @@ const Hero = () => {
     return (
       <div
         key={dot.id}
-        className="absolute w-1.5 h-1.5 rounded-full bg-[#20B2A6] opacity-40"
+        className="absolute w-1.5 h-1.5 rounded-full bg-primary/50 "
         style={{
           top: dot.top,
           left: dot.left,
@@ -39,15 +39,15 @@ const Hero = () => {
   const socials = [
     {
       icon: Github,
-      href: "www.github.com/kateykwesi",
+      href: "https://www.github.com/kateykwesi",
     },
     {
       icon: Linkedin,
-      href: "www.github.com/kateykwesi",
+      href: "https://www.linkedin.com/in/philipkatey/",
     },
     {
       icon: Twitter,
-      href: "www.github.com/kateykwesi",
+      href: "https://x.com/kateykwesi",
     },
   ];
   const skills = [
@@ -70,11 +70,11 @@ const Hero = () => {
     <section className="min-h-screen relative flex items-center ">
       <div className="absolute inset-0">
         <img
-          src="/image.png"
-          alt=" hero image"
-          className="object-cover w-full h-full opacity-40"
+          src="/hrobg.jpg"
+          alt="Hero image"
+          className="w-full h-full object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/80 to-background"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/80 to-background" />
       </div>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {displayDots}
@@ -84,28 +84,16 @@ const Hero = () => {
         <div>
           <div className="grid lg:grid-cols-2">
             <div className="space-y-8 pb-20">
-              <div>
-                <span className="inline-flex items-center gap-2 px-4 py-2 glass text-primary text-sm rounded-full animate-fade-in">
-                  <span className="w-2 h-2 bg-primary rounded-full animate-pulse " />
-                  Software Engineer-React Specialist
-                </span>
-              </div>
-
               <div className=" space-y-4">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tigh animate-fade-in animation-delay-100">
-                  Crafting
-                  <span className="text-primary glow-text"> Digital</span>
+                <h1 className="text-5xl text-[#000000] md:text-6xl lg:text-7xl font-bold leading-tigh animate-fade-in animation-delay-100">
+                  <span className="text-primary glow-text "> Frontend</span>
                   <br />
-                  experiences with
+                  <span className="pl-3">Developer</span>
                   <br />
-                  <span className="italic font-serif font-normal ">
-                    precision
-                  </span>
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                  Hi, I'm Pedro Machado — a software engineer specializing in
-                  React, Next.js, and TypeScript. I build scalable, performant
-                  web applications that users love.
+                  Hi, I'm Philip Katey — a frontend developer building modern,
+                  responsive web interfaces with React, Next.js, and TypeScript.
                 </p>
               </div>
 
@@ -127,9 +115,9 @@ const Hero = () => {
                 {socials.map((social, index) => {
                   return (
                     <a
-                      href={`${social.href}`}
+                      href={social.href}
                       key={index}
-                      className=" glass p-2 hover:text-primary hover:bg-primary/10 glass transition-all duration-300"
+                      className=" bg-white/20 rounded-full glass-white p-2 text-black hover:text-primary hover:bg-primary/10  transition-all duration-300"
                     >
                       {<social.icon className="w-5 h-5" />}
                     </a>
@@ -139,32 +127,24 @@ const Hero = () => {
             </div>
             <div className=" relative animate-fade-in animation-delay-300 ">
               <div className="relative max-w-md mx-auto">
-                <div className="rounded-3xl p-2 glass glow-border">
+                <div className="rounded-3xl p-2 glass-white">
                   <div
                     className="absolute inset-0 
               rounded-3xl bg-linear-to-br 
               from-primary/30 via-transparent 
               to-primary/10 blur-2xl animate-pulse"
                   />
+
                   <img
-                    src="/profile-photo.jpg"
+                    src="/new-profile.jpg"
                     alt="Katey Kwesi"
-                    className="w-full aspect-4/5 object-cover"
+                    className="w-full rounded-2xl  aspect-4/5 object-cover"
                   />
                   <div className="absolute inset-0">
-                    <div className=" absolute -bottom-2 -right-4 glass p-3 animate-float rounded-xl flex items-center gap-2">
-                      <div className="w-2 h-2  bg-green-500  animate-pulse" />
-                      <span className="text-sm text-muted-foreground">
+                    <div className=" absolute -bottom-2 -right-4 bg-white  shadow  p-3 animate-float rounded-2xl flex items-center gap-2">
+                      <span className="text-sm text-primary">
                         Available for work
                       </span>
-                    </div>
-                    <div className=" absolute -top-2 -left-2 glass p-3 animate-float rounded-xl flex items-center gap-2">
-                      <p className="text-sm text-muted-foreground">
-                        <span className="text-primary text-xl font-bold">
-                          5+
-                        </span>
-                        <br /> Years Exp.
-                      </p>
                     </div>
                   </div>
                 </div>

@@ -1,39 +1,91 @@
 import { useState } from "react";
 import Button from "../conponents/Button";
-import { Phone, Mail, MapPin } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Loader,
+  Send,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "pedro@example.com",
-    href: "mailto:pedro@example.com",
+    value: "philipkateyk@gmail.com",
+    href: "mailto:philipkateyk@gmail.com",
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+1 (555) 123-4567",
-    href: "tel:+15551234567",
+    value: "+233 559 511 620",
+    href: "tel:+233559511620",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "San Francisco, CA",
+    value: "Accra, Ghana",
     href: "#",
   },
 ];
 
+type EmailJSError = {
+  status: number;
+  text: string;
+};
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: ``,
     email: ``,
     message: ``,
   });
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState({
+    type: ``,
+    message: ``,
+  });
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    setSubmitStatus({ type: ``, message: `` });
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+        publicKey,
+      );
+
+      setSubmitStatus({
+        type: `success`,
+        message: "Message sent successfully! I'll get back to you soon.",
+      });
+    } catch (error) {
+      console.error(`EmailJs Error`, error);
+      const err = error as EmailJSError;
+      setSubmitStatus({
+        type: `error`,
+        message: err.text || "Failed to send message. Please try again later.",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
-    <section id="contact" className="relative overflow-hidden  py-32">
+    <section
+      id="contact"
+      className="relative overflow-hidden  bg-stone-950/90 py-32"
+    >
       <div className="container mx-auto px-6 ">
         <div className="mx-auto max-w-4xl ">
           <div className="text-center space-y-4">
@@ -47,13 +99,14 @@ const Contact = () => {
               </span>
             </h2>
             <p className="text-muted-foreground">
-              Have a project in mind? I'd love to hear about it. Send me a
-              message and let's discuss how we can work together.
+              I'm currently open to new opportunities and exciting projects.
+              Whether you need a full-time engineer or a freelance consultant,
+              let's talk!
             </p>
           </div>
         </div>
         <div className="grid lg:grid-cols-2 max-w-6xl mx-auto gap-20 mt-10">
-          <div className="glass p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
+          <div className="glass-white p-8 rounded-3xl border border-primary/30 animate-fade-in animation-delay-300">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label
@@ -71,7 +124,7 @@ const Contact = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  className="w-full px-4 py-3  rounded-xl border border-border   focus:border-primary/40 focus:ring-1 focus:ring-primary/40 outline-none transition-all"
                 />
               </div>
               <div>
@@ -90,7 +143,7 @@ const Contact = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-border   focus:border-primary/40 focus:ring-1 focus:ring-primary/40 outline-none transition-all"
                 />
               </div>
               <div>
@@ -103,30 +156,62 @@ const Contact = () => {
                 <textarea
                   id="message"
                   value={formData.message}
-                  rows={8}
+                  rows={5}
                   onChange={(e) =>
                     setFormData({ ...formData, message: e.target.value })
                   }
                   placeholder="Your message..."
-                  className="w-full px-4 py-3 bg-surface rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
+                  className="w-full px-4 py-3  rounded-xl border border-border focus:border-primary/40 focus:ring-1 focus:ring-primary/40 outline-none transition-all resize-none"
                 ></textarea>
               </div>
-              <Button size="lg" type="submit" className="w-full">
-                Send Message
+              <Button
+                size="lg"
+                type="submit"
+                className="w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    sending
+                    <Loader className="w-5 h-5" />
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <Send className="w-5 h-5" />
+                  </>
+                )}
               </Button>
+              {submitStatus.type && (
+                <div
+                  className={`flex items-center gap-3
+                     p-4 rounded-xl ${
+                       submitStatus.type === "success"
+                         ? "bg-green-500/10 border border-green-500/20 text-green-400"
+                         : "bg-red-500/10 border border-red-500/20 text-red-400"
+                     }`}
+                >
+                  {submitStatus.type === "success" ? (
+                    <CheckCircle className="w-5 h-5 shrink-0" />
+                  ) : (
+                    <AlertCircle className="w-5 h-5 shrink-0" />
+                  )}
+                  <p className="text-sm">{submitStatus.message}</p>
+                </div>
+              )}
             </form>
           </div>
           <div className="space-y-8 animate-fade-in animation-delay-300">
-            <div className="glass p-8 rounded-4xl">
+            <div className="glass-white p-8 rounded-4xl">
               <h2 className="font-bold text-xl mb-8">Contact Information</h2>
               <div className="space-y-10">
                 {contactInfo.map((info, idx) => (
                   <div
                     key={idx}
-                    className="flex p-2 items-center gap-4 rounded-xl hover:bg-surface transition-colors group"
+                    className="flex p-2 items-center gap-4 rounded-xl hover:bg-primary/5 transition-colors group"
                   >
                     <div className="p-4 bg-primary/10 rounded-2xl">
-                      <info.icon className="text-primary w-5 h-5" />
+                      <info.icon className=" w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-sm mb-2 text-muted-foreground tracking-wider">
@@ -140,17 +225,6 @@ const Contact = () => {
                   </div>
                 ))}
               </div>
-            </div>
-            <div className="glass rounded-3xl p-8 border border-primary/30">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span className="font-medium">Currently Available</span>
-              </div>
-              <p className="text-muted-foreground text-sm">
-                I'm currently open to new opportunities and exciting projects.
-                Whether you need a full-time engineer or a freelance consultant,
-                let's talk!
-              </p>
             </div>
           </div>
         </div>

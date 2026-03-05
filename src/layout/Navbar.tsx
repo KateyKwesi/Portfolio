@@ -1,89 +1,66 @@
-import { Menu, X } from "lucide-react";
-import Button from "../conponents/Button";
+import { FolderDot, House, User, Briefcase, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0); // First nav is active by default
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(scrollY > 50);
+      setScrolled(window.scrollY > 50);
     };
-    window.addEventListener(`scroll`, handleScroll);
-    return () => window.removeEventListener(`scroll`, handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const navLinks = [
+    { href: "#", label: <House />, title: "Home" },
+    { href: "#about", label: <User className="w-5 h-5" />, title: "About" },
     {
-      href: `#about`,
-      label: `About`,
+      href: "#projects",
+      label: <FolderDot className="w-5 h-5" />,
+      title: "Projects",
     },
     {
-      href: `#projects`,
-      label: `Projects`,
+      href: "#experience",
+      label: <Briefcase className="w-5 h-5" />,
+      title: "Experience",
     },
     {
-      href: `#experience`,
-      label: `Experience`,
-    },
-    {
-      href: `#testimonials`,
-      label: `Testimonials`,
+      href: "#testimonials",
+      label: <MessageCircle className="w-5 h-5" />,
+      title: "Testimonials",
     },
   ];
 
-  const displayNav = navLinks.map((nav, index) => {
-    return (
-      <a
-        onClick={() => setIsModalOpen(false)}
-        key={index}
-        href={nav.href}
-        className="px-4 py-2 text-sm hover:bg-surface rounded-full text-muted-foreground hover:text-foreground"
-      >
-        {nav.label}
-      </a>
-    );
-  });
-
   return (
     <header
-      className={`fixed top-0 right-0 left-0 transition-all duration-500 ${scrolled ? `glass` : `bg-transparent`} z-50`}
+      className={`fixed top-0 right-0 left-0 transition-all duration-500 ${
+        scrolled ? "glass-white" : "bg-transparent"
+      } z-50`}
     >
-      <nav className="container mx-auto flex justify-between items-center py-5">
-        <a
-          href="#"
-          className="text-xl font-bold tracking-tight  hover:text-primary "
-        >
-          KK
-        </a>
-        <div className="glass rounded-full px-2 py-1 hidden md:block">
-          <div className="flex items-center gap-1  rounded-full">
-            {displayNav}
+      <nav className="container mx-auto flex justify-center items-center py-5">
+        <div className="rounded-full px-2 py-1 md:block">
+          <div className="flex items-center glass-white gap-2 rounded-full">
+            {navLinks.map((nav, index) => (
+              <a
+                key={index}
+                href={nav.href}
+                title={nav.title}
+                onClick={() => setActiveIndex(index)}
+                className={`px-4 py-2 text-sm rounded-lg transition-colors duration-200
+                  ${
+                    activeIndex === index
+                      ? "bg-primary text-white"
+                      : "text-black hover:bg-surface hover:text-foreground"
+                  }`}
+              >
+                {nav.label}
+              </a>
+            ))}
           </div>
-        </div>
-        <div className="hidden md:block">
-          <a href="#contact">
-            {" "}
-            <Button children={`Contact me`} size="sm" />
-          </a>
-        </div>
-        <div className="md:hidden flex flex-col">
-          <button onClick={() => setIsModalOpen((prev) => !prev)}>
-            {isModalOpen ? <X /> : <Menu />}
-          </button>
         </div>
       </nav>
-      {isModalOpen && (
-        <div className="glass-strong  md:hidden animate-fade-in">
-          <div className="container flex flex-col  mx-auto px-6 py-6 gap-4 rounded-full">
-            {displayNav}
-            <a href="#contact">
-              {" "}
-              <Button size={"sm"}>Contact Me</Button>
-            </a>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
