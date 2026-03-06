@@ -11,7 +11,7 @@ const Projects = () => {
         "A modern movie discovery app powered by the TMDB API, featuring real-time search, dynamic movie backdrops, and a cinematic UI built with React.",
       image: slateflix,
       tags: ["React", "Vite", "Tailwind CSS", "React Query", "TMDB API"],
-      link: "https://slateflix.netlify.app/",
+      link: "https://slateflix.vercel.app/",
       github: "https://github.com/KateyKwesi/movieApp",
     },
     {
