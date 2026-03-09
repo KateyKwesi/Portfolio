@@ -2,6 +2,7 @@ import { ArrowUpRight, Github } from "lucide-react";
 import { AnimatedBorderButton } from "../conponents/AnimatedBorderButton";
 import slateflix from "../assets/projects/project1.png";
 import chef from "../assets/projects/project2.png";
+import TerrainWaves from "../conponents/Waves";
 
 const Projects = () => {
   const projects = [
@@ -49,7 +50,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group glass-white rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
+              className="group relative glass-white rounded-2xl overflow-hidden animate-fade-in md:row-span-1"
               style={{ animationDelay: `${(index + 1) * 100}ms` }}
             >
               <div className="relative overflow-hidden aspect-video">
@@ -102,6 +103,7 @@ const Projects = () => {
                   ))}
                 </div>
               </div>
+              <TerrainWaves />
             </div>
           ))}
         </div>
