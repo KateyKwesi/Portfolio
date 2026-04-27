@@ -1,26 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: ##fafafa;
-  --color-foreground: #f0f2f5;
+  --color-background: #0a0a0a;
+  --color-foreground: #e8e3dc;
 
-  --color-card: #141a1f;
+  --color-card: #111111;
+  --color-card-hover: #161616;
 
-  --color-primary: #ff4522;
+  --color-primary: #e8572a;
   --color-primary-foreground: #ffffff;
 
-  --color-secondary: #1f2830;
-  --color-secondary-foreground: #20b2a6;
+  --color-secondary: #1a1a1a;
+  --color-muted: #222222;
+  --color-muted-foreground: #6b6560;
 
-  --color-muted: #252e37;
-  --color-muted-foreground: #767676;
+  --color-border: #1f1f1f;
+  --color-border-subtle: #2a2a2a;
 
-  --color-border: #242b32;
-
-  --radius: 0.75rem;
-
-  --color-highlight: #f5a623;
-  --color-surface: #fa5b0f;
+  --radius: 0.5rem;
+  --color-accent: #c9a96e;
 }
 
 @layer base {
@@ -28,160 +26,122 @@
     scroll-behavior: smooth;
   }
 
-  button {
-    cursor: pointer;
-  }
-
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Inter", sans-serif;
+    font-family: "DM Sans", sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
   }
 
   .font-serif {
-    font-family: "Playfair Display", serif;
+    font-family: "DM Serif Display", serif;
+  }
+
+  button {
+    cursor: pointer;
   }
 }
 
 @layer components {
-  .glass {
-    background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
-    backdrop-filter: blur(16px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+  .card {
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
   }
 
-  .glass-strong {
-    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
-    backdrop-filter: blur(24px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+  .card-hover {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
   }
 
-  .glow-text {
-    text-shadow: 0 0 30px
-      color-mix(in srgb, var(--color-primary) 50%, transparent);
+  .card-hover:hover {
+    background-color: var(--color-card-hover);
+    border-color: var(--color-border-subtle);
   }
 
-  .glow-border {
-    box-shadow:
-      0 0 20px color-mix(in srgb, var(--color-primary) 20%, transparent),
-      inset 0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
+  .tag {
+    background-color: var(--color-muted);
+    color: var(--color-muted-foreground);
+    border: 1px solid var(--color-border-subtle);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+
+  .label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
   }
 }
 
 @layer utilities {
-  .glass-white {
-    @apply bg-white/20 shadow-lg ring-1 ring-black/5 backdrop-blur-md;
-  }
-  @keyframes fade-in {
+  @keyframes fade-up {
     from {
       opacity: 0;
-      transform: translateY(20px);
-      filter: blur(10px);
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
   }
 
-  @keyframes slow-drift {
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(20px, -30px);
-    }
-    50% {
-      transform: translate(-15px, -20px);
-    }
-    75% {
-      transform: translate(30px, 10px);
-    }
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes ping-slow {
+    0%, 100% { transform: scale(1); opacity: 0.75; }
+    50% { transform: scale(1.6); opacity: 0; }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .animate-fade-in {
-    animation: fade-in 0.8s ease-out both;
-  }
-
-  .animate-float {
-    animation: float 4s ease-in-out infinite;
+    animation: fade-in 0.6s ease both;
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 35s linear infinite;
   }
 
-  .animation-delay-100 {
-    animation-delay: 100ms;
+  .animate-float {
+    animation: float 5s ease-in-out infinite;
   }
 
-  .animation-delay-200 {
-    animation-delay: 200ms;
+  .animate-ping-slow {
+    animation: ping-slow 2s ease-in-out infinite;
   }
 
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+  .animation-delay-700 { animation-delay: 700ms; }
+  .animation-delay-800 { animation-delay: 800ms; }
 
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
+  .text-balance { text-wrap: balance; }
 
-  .animation-delay-500 {
-    animation-delay: 500ms;
-  }
-
-  .animation-delay-600 {
-    animation-delay: 600ms;
-  }
-
-  .animation-delay-800 {
-    animation-delay: 800ms;
-  }
-
-  @keyframes animated-border {
-    0% {
-      stroke-dashoffset: 400;
-    }
-    100% {
-      stroke-dashoffset: -550;
-    }
-  }
-
-  .group:hover .animated-border-path {
-    animation: animated-border 1.5s linear infinite;
-  }
-
-  .animated-border:hover {
-    background-color: color-mix(in srgb, #26c4b8 15%, transparent);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 20%, transparent);
-  }
-
-  .timeline-glow {
-    box-shadow:
-      0 0 40px color-mix(in srgb, var(--color-primary) 35%, transparent),
-      0 0 80px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border-subtle), transparent);
   }
 }

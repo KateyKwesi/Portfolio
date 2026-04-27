@@ -1,65 +1,56 @@
-import { FolderDot, House, User, Briefcase, MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
+
+const navLinks = [
+  { href: "#", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#projects", label: "Projects" },
+  { href: "#experience", label: "Experience" },
+  { href: "#testimonials", label: "Testimonials" },
+  { href: "#contact", label: "Contact" },
+];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0); // First nav is active by default
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const navLinks = [
-    { href: "#", label: <House />, title: "Home" },
-    { href: "#about", label: <User className="w-5 h-5" />, title: "About" },
-    {
-      href: "#projects",
-      label: <FolderDot className="w-5 h-5" />,
-      title: "Projects",
-    },
-    {
-      href: "#experience",
-      label: <Briefcase className="w-5 h-5" />,
-      title: "Experience",
-    },
-    {
-      href: "#testimonials",
-      label: <MessageCircle className="w-5 h-5" />,
-      title: "Testimonials",
-    },
-  ];
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 transition-all duration-500 ${
-        scrolled ? "glass-white" : "bg-transparent"
-      } z-50`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? "bg-background/90 backdrop-blur-md border-b border-border" : "bg-transparent"
+      }`}
     >
-      <nav className="container mx-auto flex justify-center items-center py-5">
-        <div className="rounded-full px-2 py-1 md:block">
-          <div className="flex items-center glass-white gap-2 rounded-full">
-            {navLinks.map((nav, index) => (
-              <a
-                key={index}
-                href={nav.href}
-                title={nav.title}
-                onClick={() => setActiveIndex(index)}
-                className={`px-4 py-2 text-sm rounded-lg transition-colors duration-200
-                  ${
-                    activeIndex === index
-                      ? "bg-primary text-white"
-                      : "text-black hover:bg-surface hover:text-foreground"
-                  }`}
-              >
-                {nav.label}
-              </a>
-            ))}
-          </div>
+      <nav className="container mx-auto px-6 flex items-center justify-between py-5">
+        <a href="#" className="font-serif text-xl text-foreground">
+          P<span className="text-primary">K</span>
+        </a>
+        <div className="hidden md:flex items-center gap-1">
+          {navLinks.map((link, i) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setActive(i)}
+              className={`px-4 py-2 text-sm rounded-full transition-colors duration-200 ${
+                active === i
+                  ? "text-foreground bg-muted"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
+        <a
+          href="#contact"
+          className="text-sm px-5 py-2 rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition-colors"
+        >
+          Hire me
+        </a>
       </nav>
     </header>
   );

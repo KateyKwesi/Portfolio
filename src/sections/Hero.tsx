@@ -1,190 +1,105 @@
-import { useState } from "react";
+import { ArrowRight, ChevronDown, Github, Linkedin, Twitter } from "lucide-react";
 import Button from "../conponents/Button";
-import {
-  ArrowRight,
-  ChevronDown,
-  Download,
-  Github,
-  Linkedin,
-  Twitter,
-} from "lucide-react";
-import { AnimatedBorderButton } from "../conponents/AnimatedBorderButton";
 
-const Hero = () => {
-  const [dots] = useState(() =>
-    [...Array(20)].map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      animation: `slow-drift ${15 + Math.random() * 20}s ease-in-out infinite`,
-      animationDelay: `${Math.random() * 5}s`,
-    })),
-  );
+const skills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI", "Node.js", "Zustand", "Figma", "Vite", "REST APIs"];
 
-  const displayDots = dots.map((dot) => {
-    return (
-      <div
-        key={dot.id}
-        className="absolute w-1.5 h-1.5 rounded-full bg-primary/50 "
-        style={{
-          top: dot.top,
-          left: dot.left,
-          animation: dot.animation,
-          animationDelay: dot.animationDelay,
-        }}
-      ></div>
-    );
-  });
+const socials = [
+  { icon: Github, href: "https://www.github.com/kateykwesi", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/philipkatey/", label: "LinkedIn" },
+  { icon: Twitter, href: "https://x.com/kateykwesi", label: "Twitter" },
+];
 
-  const socials = [
-    {
-      icon: Github,
-      href: "https://www.github.com/kateykwesi",
-    },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/philipkatey/",
-    },
-    {
-      icon: Twitter,
-      href: "https://x.com/kateykwesi",
-    },
-  ];
-  const skills = [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "JavaScript (ES6+)",
-    "Tailwind CSS",
-    "Shadcn UI",
-    "Zustand",
-    "Node.js",
-    "REST API Integration",
-    "Figma",
-    "Git",
-    "GitHub",
-    "Vite",
-  ];
+const Hero = () => (
+  <section className="min-h-screen relative flex items-center overflow-hidden">
+    {/* Background grid */}
+    <div className="absolute inset-0 opacity-[0.03]" style={{
+      backgroundImage: "linear-gradient(var(--color-foreground) 1px, transparent 1px), linear-gradient(90deg, var(--color-foreground) 1px, transparent 1px)",
+      backgroundSize: "80px 80px"
+    }} />
+    {/* Glow */}
+    <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/8 rounded-full blur-[120px] pointer-events-none" />
 
-  return (
-    <section className="min-h-screen relative flex items-center ">
-      <div className="absolute inset-0">
-        {/* <img
-          src="/hrobg.jpg"
-          alt="Hero image"
-          className="w-full h-full object-cover opacity-40"
-        /> */}
-        <div className="absolute inset-0 bg-linear-to-b from-background/20 via-background/80 to-background" />
-      </div>
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {displayDots}
-      </div>
-
-      <div className="relative z-10 mx-auto px-6 container pt-25">
-        <div>
-          <div className="grid lg:grid-cols-2">
-            <div className="space-y-8 pb-20">
-              <div className=" space-y-4">
-                <h1 className="text-5xl text-[#000000] md:text-6xl lg:text-7xl font-bold leading-tigh animate-fade-in animation-delay-100">
-                  <span className="text-primary glow-text "> Frontend</span>
-                  <br />
-                  <span className="pl-3">Developer</span>
-                  <br />
-                </h1>
-                <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">
-                  Hi, I'm Philip Katey — a frontend developer building modern,
-                  responsive web interfaces with React, Next.js, and TypeScript.
-                </p>
-              </div>
-
-              <div className="flex  flex-wrap gap-4 animate-fade-in animation-delay-300">
-                <a href="#contact">
-                  {" "}
-                  <Button size="lg">
-                    Contact Me
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </a>
-                <AnimatedBorderButton>
-                  <Download className="w-5 h-5" />
-                  Download Cv
-                </AnimatedBorderButton>
-              </div>
-
-              <div className="flex gap-4 items-center animate-fade-in animation-delay-400  ">
-                {socials.map((social, index) => {
-                  return (
-                    <a
-                      href={social.href}
-                      key={index}
-                      className=" bg-white/20 rounded-full glass-white p-2 text-black hover:text-primary hover:bg-primary/10  transition-all duration-300"
-                    >
-                      {<social.icon className="w-5 h-5" />}
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-            <div className=" relative animate-fade-in animation-delay-300 ">
-              <div className="relative max-w-md mx-auto">
-                <div className="rounded-3xl p-2 glass-white">
-                  <div
-                    className="absolute inset-0 
-              rounded-3xl bg-linear-to-br 
-              from-primary/30 via-transparent 
-              to-primary/10 blur-2xl animate-pulse"
-                  />
-
-                  <img
-                    src="/new-profile.jpg"
-                    alt="Katey Kwesi"
-                    className="w-full rounded-2xl  aspect-4/5 object-cover"
-                  />
-                  <div className="absolute inset-0">
-                    <div className=" absolute -bottom-2 -right-4 bg-white  shadow  p-3 animate-float rounded-2xl flex items-center gap-2">
-                      <span className="text-sm text-primary">
-                        Available for work
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className=" animation-delay-600 py-10 animate-fade-in">
-          <p className="text-sm  text-center mb mb-6 text-muted-foreground">
-            Technologies i work with
+    <div className="relative z-10 container mx-auto px-6 pt-28 pb-20">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Left */}
+        <div className="space-y-8">
+          <p className="label animate-fade-up">Available for work &mdash; Accra, Ghana</p>
+          <h1 className="font-serif text-6xl md:text-7xl lg:text-8xl leading-[0.95] animate-fade-up animation-delay-100">
+            Frontend<br />
+            <span className="text-primary italic">Developer</span>
+          </h1>
+          <p className="text-muted-foreground text-lg max-w-md leading-relaxed animate-fade-up animation-delay-200">
+            I'm Philip Katey — I build modern, responsive web interfaces with React, Next.js, and TypeScript.
           </p>
-          <div className="relative overflow-hidden">
-            <div className="flex  animate-marquee ">
-              {[...skills, ...skills, ...skills].map((skill, index) => {
-                return (
-                  <div key={index} className=" px-8 py-4 shrink-0">
-                    <span className="text-muted-foreground/50 text-xl font-semibold hover:text-primary/60 transition-colors">
-                      {skill}
-                    </span>
-                  </div>
-                );
-              })}
+          <div className="flex flex-wrap gap-4 animate-fade-up animation-delay-300">
+            <a href="#contact">
+              <Button size="lg">
+                Contact Me <ArrowRight className="w-4 h-4" />
+              </Button>
+            </a>
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 px-8 py-4 text-base rounded-full border border-border text-foreground hover:border-primary hover:text-primary transition-colors"
+            >
+              View Work
+            </a>
+          </div>
+          <div className="flex gap-3 animate-fade-up animation-delay-400">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                aria-label={s.label}
+                className="p-2.5 rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors"
+              >
+                <s.icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Right — profile */}
+        <div className="relative animate-fade-up animation-delay-300 flex justify-center lg:justify-end">
+          <div className="relative w-72 md:w-80">
+            <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl" />
+            <div className="relative rounded-2xl overflow-hidden border border-border">
+              <img
+                src="/new-profile.jpg"
+                alt="Philip Katey"
+                className="w-full aspect-[4/5] object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-4 -right-4 bg-card border border-border rounded-xl px-4 py-3 animate-float">
+              <span className="text-xs text-primary font-medium">Available for work</span>
             </div>
           </div>
         </div>
       </div>
-      <div
-        className="absolute -bottom-1 left-1/2 -translate-x-1/2 
-      animate-fade-in animation-delay-800"
-      >
-        <a
-          href="#about"
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
-        >
-          <span className="text-xs uppercase tracking-wider">Scroll</span>
-          <ChevronDown className="w-6 h-6 animate-bounce" />
-        </a>
+
+      {/* Marquee */}
+      <div className="mt-20 animate-fade-up animation-delay-600">
+        <div className="divider mb-8" />
+        <p className="label text-center mb-6">Technologies I work with</p>
+        <div className="relative overflow-hidden">
+          <div className="flex animate-marquee">
+            {[...skills, ...skills, ...skills].map((skill, i) => (
+              <span key={i} className="px-8 py-2 shrink-0 text-muted-foreground/40 text-sm font-medium tracking-wide hover:text-muted-foreground transition-colors">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
-    </section>
-  );
-};
+    </div>
+
+    <a
+      href="#about"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground transition-colors animate-fade-up animation-delay-800"
+    >
+      <span className="label">Scroll</span>
+      <ChevronDown className="w-4 h-4 animate-bounce" />
+    </a>
+  </section>
+);
 
 export default Hero;
